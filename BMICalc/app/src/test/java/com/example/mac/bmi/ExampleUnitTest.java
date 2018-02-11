@@ -1,4 +1,4 @@
-package com.example.mac.bmicalc;
+package com.example.mac.bmi;
 
 import org.junit.Test;
 

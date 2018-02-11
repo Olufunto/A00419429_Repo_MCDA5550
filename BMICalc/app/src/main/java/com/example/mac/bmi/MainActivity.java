@@ -1,5 +1,7 @@
-package com.example.mac.bmicalc;
+package com.example.mac.bmi;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.content.Intent;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,19 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-        }
-
-
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,6 +32,34 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        InClassDatabaseHelper helper = new InClassDatabaseHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        //run a query
+        Cursor cursor = db.query(InClassDatabaseHelper.TABLE_NAME,new String[]
+                        {"NAME","PASSWORD","DATE"},
+                null,null,null,null,null);
+
+         if (cursor.moveToFirst()){
+        String  name = cursor.getString(0);
+        EditText editname = (EditText) findViewById(R.id.fnameText);
+             editname.setText(name);
+             String  password = cursor.getString(1);
+             EditText editPassword = (EditText) findViewById(R.id.passwordText);
+             editname.setText(password);
+             String  date = cursor.getString(2);
+             EditText editDate = (EditText) findViewById(R.id.dobText);
+             editname.setText(date);
+             String  Health = cursor.getString(3);
+             EditText editHealth = (EditText) findViewById(R.id.hcnText);
+             editname.setText(Health);
+
+        }
+
+        cursor.close();
+        db.close();
+
+
     }
 
     @Override
@@ -46,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+    public void hellobutton (View v)
+    {
+        Intent intent=new Intent (this,Main2Activity.class);
+    startActivity(intent);
+
     }
 
     @Override
