@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mac.bmiapp.RegisterActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="368dp"
+        android:layout_height="526dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="57dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="29dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/register" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/emailEditText"
+            app:layout_constraintStart_toStartOf="@+id/emailEditText"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:hint="Full Name" />
+
+        <EditText
+            android:id="@+id/hcnEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="22dp"
+            android:ems="10"
+            android:hint="#HCN"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/dobEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/dobEditText"
+            app:layout_constraintStart_toStartOf="@+id/hcnEditText"
+            app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+        <EditText
+            android:id="@+id/dobEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
+            android:ems="10"
+            android:hint="D.O.B"
+            android:inputType="date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/hcnEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hcnEditText" />
+
+        <EditText
+            android:id="@+id/pwdEditText"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/hcnEditText"
+            app:layout_constraintTop_toBottomOf="@+id/dobEditText"
+            tools:hint="Password" />
+
+        <Button
+            android:id="@+id/registerSubmitButton"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="101dp"
+            android:layout_marginLeft="98dp"
+            android:layout_marginRight="101dp"
+            android:layout_marginStart="98dp"
+            android:layout_marginTop="12dp"
+            android:text="Submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pwdEditText"
+            app:layout_constraintTop_toBottomOf="@+id/pwdEditText" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
