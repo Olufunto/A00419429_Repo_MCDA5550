@@ -11,11 +11,15 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import android.app.Activity;
+import android.content.Intent;
 
 public class RegisterActivity extends AppCompatActivity {
     Button button;
     EditText tusrname, tpwd, thcn, tdob, temail;
     DBHelper appdb ;
+    MainActivity forpwd;
+   public String encypwd ;
 
     public static String usr;
 
@@ -33,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         appdb = new DBHelper(this);
+        forpwd = new MainActivity();
 
 
         Log.d("Checking here ","Checking here ");
@@ -47,13 +52,23 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 usr = tusrname.getText().toString();
+
                 if (!tusrname.getText().toString().equals("") ||
-                        !tpwd.getText().toString().isEmpty() ||
-                        !temail.getText().toString().isEmpty()) {
+                        !tpwd.getText().toString().equals("") ||
+                        !temail.getText().toString().equals("")) {
                     Log.d("DBCall","Abt to hit db ");
                     Log.i("DBCall","~~~~~~~~~~");
-                    appdb.insertUser(tusrname.toString(),
-                            tpwd.getText().toString(),
+                    try {
+                        encypwd=  forpwd.encryptpwd(tpwd.getText().toString(),tusrname.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.i("DBCall","Username to be inserted is "+tusrname.getText().toString());
+                    Log.i("DBCall","Password to be inserted is "+tpwd.getText().toString());
+                    Log.i("DBcall","Password encrypted to be stored in DB is "+encypwd);
+                    appdb.insertUser(tusrname.getText().toString(),
+                            encypwd,
                             temail.getText().toString(),
                             formattedDate, tdob.getText().toString(),
                             thcn.getText().toString());
@@ -62,6 +77,16 @@ public class RegisterActivity extends AppCompatActivity {
                     Log.d("Saving record ","Saving record ");
                     Toast.makeText(getApplicationContext(),
                             "Saving Record..",Toast.LENGTH_SHORT).show();
+
+
+                            Intent mainIntent = new Intent(RegisterActivity.this,
+                                    MainActivity.class);
+                            startActivity(mainIntent);
+
+
+
+
+
                 }
                 ;
             }

@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by mac on 2/15/18.
@@ -73,7 +74,9 @@ public class DBHelper extends SQLiteOpenHelper{
         contentValues.put("dob", dob);
         contentValues.put("hcn", hcn);
         db.insert("smtb_user", null, contentValues);
+
         return true;
+
     }
 
     public boolean insertReading (String username, String cdate, String height, String weight,String bmi) {
@@ -94,6 +97,29 @@ public class DBHelper extends SQLiteOpenHelper{
 
         return true;
     }
+
+    public String getPassword (String usrname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sqlquery = "select username,password from smtb_user";
+        Cursor cursor = db.rawQuery(sqlquery,null);
+        String v_usrname, v_password;
+        v_password = "No Data Found";
+        if(cursor.moveToFirst()){
+            do{v_usrname = cursor.getString(0);
+            if(v_usrname.equals(usrname))
+            {
+                v_password = cursor.getString(1);
+                break;
+            }
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+
+        }
+        return v_password;
+
+    }
+
 
     public Cursor getData(String  uname) {
         SQLiteDatabase db = this.getReadableDatabase();
