@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import android.app.Activity;
+
 import android.content.Intent;
 
 public class RegisterActivity extends AppCompatActivity {

@@ -10,26 +10,18 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
 
 /**
  * Created by mac on 2/15/18.
  */
 
 
-
-public class DBHelper extends SQLiteOpenHelper{
+public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "BMIdb.db";
     public static final String SMTB_TABLE_NAME = "smtb_user";
     public static final String SMTB_READING_TABLE_NAME = "smtb_reading";
-   // public static final String SMTB_COLUMN_ID = "id";
-    public static final String SMTB_COLUMN_USRNAME = "username";
-    public static final String SMTB_COLUMN_PASSWORD = "password";
-    public static final String SMTB_COLUMN_EMAIL = "email";
-    public static final String SMTB_COLUMN_REGDT = "regdt";
-    public static final String SMTB_COLUMN_DOB = "dob";
-    public static final String SMTB_COLUMN_HCN = "hcn";
     public static final String SMTB_READING_ID = "_id";
     public static final String SMTB_READING_USR = "username";
     public static final String SMTB_READING_CDATE = "cdate";
@@ -37,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper{
     private HashMap hp;
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
@@ -52,19 +44,19 @@ public class DBHelper extends SQLiteOpenHelper{
                 "create table smtb_reading " +
                         "(username text ,cdate text,height text,weight text, bmi text)"
 
-                //String username, String cdate, String height, String weight,String bmi
+
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub
+
         db.execSQL("DROP TABLE IF EXISTS smtb_user");
         db.execSQL("DROP TABLE IF EXISTS smtb_reading");
         onCreate(db);
     }
 
-    public boolean insertUser (String username, String password, String email, String regdt,String dob,String hcn) {
+    public boolean insertUser(String username, String password, String email, String regdt, String dob, String hcn) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -79,14 +71,11 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public boolean insertReading (String username, String cdate, String height, String weight,String bmi) {
+    public boolean insertReading(String username, String cdate, String height, String weight, String bmi) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-       // db.execSQL("drop table smtb_reading");
-       // db.execSQL(
-       //         "create table smtb_reading " +
-       //                 "(username text ,cdate text,height text,weight text, bmi text)");
+
         ContentValues readingContentValues = new ContentValues();
         readingContentValues.put("username", username);
         readingContentValues.put("cdate", cdate);
@@ -98,19 +87,19 @@ public class DBHelper extends SQLiteOpenHelper{
         return true;
     }
 
-    public String getPassword (String usrname){
+    public String getPassword(String usrname) {
         SQLiteDatabase db = this.getReadableDatabase();
         String sqlquery = "select username,password from smtb_user";
-        Cursor cursor = db.rawQuery(sqlquery,null);
+        Cursor cursor = db.rawQuery(sqlquery, null);
         String v_usrname, v_password;
         v_password = "No Data Found";
-        if(cursor.moveToFirst()){
-            do{v_usrname = cursor.getString(0);
-            if(v_usrname.equals(usrname))
-            {
-                v_password = cursor.getString(1);
-                break;
-            }
+        if (cursor.moveToFirst()) {
+            do {
+                v_usrname = cursor.getString(0);
+                if (v_usrname.equals(usrname)) {
+                    v_password = cursor.getString(1);
+                    break;
+                }
             }
             while (cursor.moveToNext());
             cursor.close();
@@ -121,25 +110,25 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
 
-    public Cursor getData(String  uname) {
+    public Cursor getData(String uname) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from smtb_user where username="+uname+"", null );
+        Cursor res = db.rawQuery("select * from smtb_user where username=" + uname + "", null);
         return res;
     }
 
     public Cursor getReading() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor response =  db.rawQuery( "select rowid as _id, a.* from smtb_reading a ", null );
+        Cursor response = db.rawQuery("select rowid as _id, a.* from smtb_reading a ", null);
         return response;
     }
 
-    public int numberOfRows(){
+    public int numberOfRows() {
         SQLiteDatabase db = this.getReadableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, SMTB_TABLE_NAME);
         return numRows;
     }
 
-    public boolean updateUser ( String username, String password, String email, String regdt,String dob, String hcn) {
+    public boolean updateUser(String username, String password, String email, String regdt, String dob, String hcn) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -148,15 +137,24 @@ public class DBHelper extends SQLiteOpenHelper{
         contentValues.put("regdt", regdt);
         contentValues.put("dob", dob);
         contentValues.put("hcn", hcn);
-        db.update("smtb_user", contentValues, "username = ? ", new String[] { username } );
+        db.update("smtb_user", contentValues, "username = ? ", new String[]{username});
         return true;
     }
 
-    public Integer deleteUser (String username) {
+    public boolean updatePwd(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        db.update("smtb_user", contentValues, "username = ? ", new String[]{username});
+        return true;
+    }
+
+    public Integer deleteUser(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("smtb_user",
                 "id = ? ",
-                new String[] { username });
+                new String[]{username});
     }
 
     public ArrayList<String> getAllUser() {
@@ -164,10 +162,10 @@ public class DBHelper extends SQLiteOpenHelper{
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from smtb_user", null );
+        Cursor res = db.rawQuery("select * from smtb_user", null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while (res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex(SMTB_TABLE_NAME)));
             res.moveToNext();
         }
@@ -179,10 +177,10 @@ public class DBHelper extends SQLiteOpenHelper{
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from smtb_reading", null );
+        Cursor res = db.rawQuery("select * from smtb_reading", null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while (res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex(SMTB_READING_TABLE_NAME)));
             res.moveToNext();
         }

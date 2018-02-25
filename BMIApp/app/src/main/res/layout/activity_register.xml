@@ -32,10 +32,10 @@
             android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:hint="Username"
             app:layout_constraintEnd_toEndOf="@+id/emailEditText"
             app:layout_constraintStart_toStartOf="@+id/emailEditText"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            tools:hint="Full Name" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <EditText
             android:id="@+id/hcnEditText"
@@ -47,7 +47,7 @@
             android:layout_marginStart="42dp"
             android:layout_marginTop="22dp"
             android:ems="10"
-            android:hint="#HCN"
+            android:hint="#H.C.N"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toStartOf="@+id/dobEditText"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,10 +84,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="@+id/hcnEditText"
-            app:layout_constraintTop_toBottomOf="@+id/dobEditText"
-            tools:hint="Password" />
+            app:layout_constraintTop_toBottomOf="@+id/dobEditText" />
 
         <Button
             android:id="@+id/registerSubmitButton"

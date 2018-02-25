@@ -9,9 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/readingLayout"
     tools:context="com.example.mac.bmiapp.ReadingActivity"
     tools:layout_editor_absoluteY="81dp">
 
+    <include
+        layout = "@layout/app_bar"
+        android:id="@+id/app_bar"></include>
 
     <ImageView
         android:id="@+id/imageView"
@@ -37,7 +41,7 @@
         android:layout_below="@+id/imageView"
         android:layout_marginBottom="16dp"
         android:focusable="true"
-        android:hint="Enter Height"
+        android:hint="Enter Height in kg"
         android:textAlignment="center"
         android:textColorHighlight="#F4ECF7"
         android:textColorHint="#5B2C6F"
@@ -57,7 +61,7 @@
         android:layout_below="@+id/imageView"
         android:layout_marginBottom="16dp"
         android:focusable="true"
-        android:hint="Enter Weight"
+        android:hint="Enter Weight in cm"
         android:textAlignment="center"
         android:textColorHighlight="#F4ECF7"
         android:textColorHint="#5B2C6F"
